@@ -39,7 +39,20 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+        // First, create a list variable name 'multiples'
+        // Second, use a loop starting at index 1 that would execute as long as the current index is less than or equal to the size 'length' provided as the second argument
+        // Third, inside the for loop, multiply the 'number' (first argument) by the current index and then add the result to the list variable created in the first step named 'multiples'
+        // Final, convert the list variable to an array and return the result
+
+        List<double> multiples = new List<double>();
+
+        for (double i = 1; i <= length; i++)
+        {
+            double multiple = number * i;
+            multiples.Add( multiple );
+        }
+
+        return multiples.ToArray(); // replace this return statement with your own
     }
     
     /// <summary>
@@ -56,6 +69,20 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // First, get the difference between the list length and the 'amount' argument passed to the function to know the number of elements on the left side of the amount and name it 'leftElementsCount'
+        // Second, create a for loop with a starting index of 0 with the condition of the index being less than the 'leftElementsCount' argument passed ( index < 'amount')
+        // Third, Inside the loop, get the value of the 'data' List argumnent that matches the current index and use the Add method to add it at the end of the 'data' List argument.
+        // Fourth, after the loop, use the List RemoveRange method to remove the range of elements from the 'data' List starting from 0 with a count being equal to the 'amount' argument.
+
+        int leftElementsCount = data.Count - amount;
+
+        for (int i = 0; i < leftElementsCount; i++)
+        {
+            data.Add( data[ i ] );
+        }
+
+        data.RemoveRange( 0, leftElementsCount );
 
     }
 }
