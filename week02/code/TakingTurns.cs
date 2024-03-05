@@ -13,8 +13,10 @@
         players.AddPerson("Tim", 5);
         players.AddPerson("Sue", 3);
         // Console.WriteLine(players);    // This can be un-commented out for debug help
-        while (players.Length > 0)
+        while (players.Length > 0) {
             players.GetNextPerson();
+            // Console.WriteLine(players);
+        }
         // Defect(s) Found: 
 
         Console.WriteLine("---------");
