@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json;
 
 public static class SetsAndMapsTester {
@@ -111,6 +112,27 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+
+        HashSet<string> uniqueWords = words.ToHashSet();
+        Dictionary<string, string> pairs = new Dictionary<string, string>();
+
+        foreach (var word in uniqueWords)
+        {
+            string reversed = $"{word[1]}{word[0]}";
+
+            if (pairs.ContainsKey(reversed))
+                pairs[reversed] = word;
+
+            else if (! pairs.ContainsKey(word))
+                pairs[word] = null;
+
+        }
+
+        foreach (var key in pairs.Keys)
+        {
+            if (pairs[key] != null)
+                Console.WriteLine($"{pairs[key]} & {key}");
+        }
     }
 
     /// <summary>
@@ -132,6 +154,13 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            string degree = fields[3];
+            
+            if (degrees.ContainsKey(degree))
+                degrees[degree]++;
+
+            else 
+                degrees[degree] = 1;
         }
 
         return degrees;
@@ -158,6 +187,52 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
+
+        word1 = word1.ToLower().Replace(" ", "");
+        word2 = word2.ToLower().Replace(" ", "");
+
+        if (word1.Length != word2.Length) {
+            // Console.WriteLine("didn't pass");
+            return false;
+        }
+
+        var letterCountWordOne = new Dictionary<char, int>();
+
+        // Console.WriteLine(word1);
+        // Console.WriteLine(word2);
+
+        foreach (var letter in word1)
+        {
+            if (letterCountWordOne.ContainsKey(letter))
+                letterCountWordOne[letter]++;
+                
+            else
+                letterCountWordOne[letter] = 1;
+
+        }
+
+        // Console.WriteLine( $"1-{JsonSerializer.Serialize(letterCountWordOne.ToList() )}" );
+
+        foreach (var letter in word2)
+        {
+
+            if (! letterCountWordOne.ContainsKey(letter))
+                return false;
+
+            if (letterCountWordOne.ContainsKey(letter) && letterCountWordOne[letter] > 1)
+               letterCountWordOne[letter]--;
+            else
+                letterCountWordOne.Remove(letter);
+
+        }
+
+        // Console.WriteLine( $"2-{JsonSerializer.Serialize(letterCountWordOne.ToList() )}" );
+
+        // Console.WriteLine(letterCountWordOne.Count);
+
+
+        if (letterCountWordOne.Count == 0) return true;
+
         return false;
     }
 

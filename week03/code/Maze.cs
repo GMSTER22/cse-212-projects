@@ -21,6 +21,17 @@ public class Maze {
 
     public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap) {
         _mazeMap = mazeMap;
+        // foreach (var entry in _mazeMap)
+        // {
+        //     Console.WriteLine(entry.Key);
+        //     Console.WriteLine(_mazeMap[entry.Key]);
+        // }
+        // Console.WriteLine(_mazeMap[(1, 2)][1]);
+        // Console.WriteLine(_mazeMap.ContainsKey((1, 2)));
+        // Console.WriteLine(_mazeMap[(1, 2)][0]);
+        // Console.WriteLine(_mazeMap[(1, 2)][1]);
+        // Console.WriteLine(_mazeMap[(1, 2)][2]);
+        // Console.WriteLine(_mazeMap[(1, 2)][3]);
     }
 
     // Todo Maze Problem - ADD YOUR CODE HERE
@@ -29,7 +40,19 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveLeft() {
+        Console.WriteLine($"\nstatus-({_currX},{_currY})");
         // FILL IN CODE
+        ValueTuple<int, int> currentLocation = (_currX, _currY);
+
+        if (_mazeMap.ContainsKey(currentLocation) &&_mazeMap[currentLocation][0])
+        { 
+            _currX--;
+        }
+        else
+        {
+            Console.WriteLine("Can't go left!");
+        }
+
     }
 
     /// <summary>
@@ -37,7 +60,18 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveRight() {
+        Console.WriteLine($"\nstatus-({_currX},{_currY})");
         // FILL IN CODE
+        ValueTuple<int, int> currentLocation = (_currX, _currY);
+
+        if (_mazeMap.ContainsKey(currentLocation) &&_mazeMap[currentLocation][1])
+        { 
+            _currX++;
+        }
+        else
+        {
+            Console.WriteLine("Can't go right!");
+        }
     }
 
     /// <summary>
@@ -45,7 +79,18 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveUp() {
+        Console.WriteLine($"\nstatus-({_currX},{_currY})");
         // FILL IN CODE
+        ValueTuple<int, int> currentLocation = (_currX, _currY);
+
+        if (_mazeMap.ContainsKey(currentLocation) &&_mazeMap[currentLocation][2])
+        { 
+            _currY--;
+        }
+        else
+        {
+            Console.WriteLine("Can't go up!");
+        }
     }
 
     /// <summary>
@@ -53,7 +98,18 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveDown() {
+        Console.WriteLine($"\nstatus-({_currX},{_currY})");
         // FILL IN CODE
+        ValueTuple<int, int> currentLocation = (_currX, _currY);
+
+        if (_mazeMap.ContainsKey(currentLocation) &&_mazeMap[currentLocation][3])
+        { 
+            _currY++;
+        }
+        else
+        {
+            Console.WriteLine("Can't go down!");
+        }
     }
 
     public void ShowStatus() {

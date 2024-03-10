@@ -1,19 +1,59 @@
-﻿/// <summary>
+﻿using System.Security.Cryptography;
+
+/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
 public class CustomerService {
     public static void Run() {
         // Example code to see what's in the customer service queue:
-        // var cs = new CustomerService(10);
-        // Console.WriteLine(cs);
+        var cs = new CustomerService(-1);
+        Console.WriteLine(cs);
 
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Test the size of the array.
+        // Expected Result: if CustomerService is negative, size is 10
         Console.WriteLine("Test 1");
+        Console.WriteLine( cs._maxSize ); // 10
+
+        // Test 2
+        // Scenario: Test the size of the array.
+        // Expected Result: if CustomerService is negative, size is 15
+        Console.WriteLine("Test 2");
+        cs = new CustomerService(15);
+        Console.WriteLine( cs._maxSize ); // 15
+
+        // Test 3
+        // Scenario: Test the size of the array.
+        // Expected Result: if CustomerService is negative, size is 15
+        Console.WriteLine("Test 3");
+        cs = new CustomerService(15);
+        Console.WriteLine( cs._maxSize ); // 15
+
+        // Test 4
+        // Scenario: Test the size of the array.
+        // Expected Result: max size should return 5
+        Console.WriteLine("Test 4");
+        cs = new CustomerService(5);
+        Console.WriteLine( cs._maxSize ); // 5
+
+        // Test 5
+        // Scenario: Test the size of the array.
+        // Expected Result: max size should return 5
+        Console.WriteLine("Test 5");
+        cs = new CustomerService(5);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+
+        cs.ServeCustomer();
+
+        Console.WriteLine(cs.ToString());
+        // Customer customer2 = new cs.Customer('Albert','011','Proem minor');
+        // cs.AddNewCustomer( customer1 );
+        // cs.AddNewCustomer( customer2 );
+
 
         // Defect(s) Found: 
 
@@ -46,10 +86,21 @@ public class CustomerService {
     /// This is an inner class.  Its real name is CustomerService.Customer
     /// </summary>
     private class Customer {
+        private char v1;
+        private char v2;
+        private char v3;
+
         public Customer(string name, string accountId, string problem) {
             Name = name;
             AccountId = accountId;
             Problem = problem;
+        }
+
+        public Customer(char v1, char v2, char v3)
+        {
+            this.v1 = v1;
+            this.v2 = v2;
+            this.v3 = v3;
         }
 
         private string Name { get; }
@@ -67,7 +118,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +139,16 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count <= 0)
+        {
+            Console.WriteLine("No Customers in the queue");
+        }
+        else
+        {
+            var customer = _queue[0];
+            _queue.RemoveAt(0);
+            Console.WriteLine(customer);
+        }
     }
 
     /// <summary>
