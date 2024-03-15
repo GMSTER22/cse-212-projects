@@ -191,15 +191,12 @@ public static class SetsAndMapsTester {
         word1 = word1.ToLower().Replace(" ", "");
         word2 = word2.ToLower().Replace(" ", "");
 
-        if (word1.Length != word2.Length) {
-            // Console.WriteLine("didn't pass");
+        if (word1.Length != word2.Length) 
+        {
             return false;
         }
 
         var letterCountWordOne = new Dictionary<char, int>();
-
-        // Console.WriteLine(word1);
-        // Console.WriteLine(word2);
 
         foreach (var letter in word1)
         {
@@ -210,8 +207,6 @@ public static class SetsAndMapsTester {
                 letterCountWordOne[letter] = 1;
 
         }
-
-        // Console.WriteLine( $"1-{JsonSerializer.Serialize(letterCountWordOne.ToList() )}" );
 
         foreach (var letter in word2)
         {
@@ -225,10 +220,6 @@ public static class SetsAndMapsTester {
                 letterCountWordOne.Remove(letter);
 
         }
-
-        // Console.WriteLine( $"2-{JsonSerializer.Serialize(letterCountWordOne.ToList() )}" );
-
-        // Console.WriteLine(letterCountWordOne.Count);
 
 
         if (letterCountWordOne.Count == 0) return true;
@@ -306,9 +297,15 @@ public static class SetsAndMapsTester {
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
-        // TODO:
-        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
-        // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+        // int count = 0;
+
+        foreach (var feature in featureCollection.Features)
+        {
+            Console.WriteLine( $"{feature.Properties.Place} - Mag {feature.Properties.Mag}" );
+
+            // if ( count > 10 ) break;
+
+            // count++;
+        }
     }
 }
