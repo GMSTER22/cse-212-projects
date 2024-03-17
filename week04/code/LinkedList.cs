@@ -28,6 +28,18 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void InsertTail(int value) {
         // TODO Problem 1
+        Node newNode = new Node(value);
+
+        if (_head is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        }
+        else {
+            newNode.Prev = _tail;
+            _tail.Next = newNode;
+            _tail = newNode;
+        }
     }
 
 
@@ -56,6 +68,21 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void RemoveTail() {
         // TODO Problem 2
+        if (_tail is null)
+            return;
+
+        if (_tail == _head)
+        {
+            _head = null;
+            _tail = null;
+        }
+        else
+        {
+            _tail.Prev!.Next = null;
+            _tail = _tail.Prev;
+            // _tail.Prev.Next = null;
+            // _tail = _tail.Prev;
+        }
     }
 
     /// <summary>
@@ -94,6 +121,32 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Remove(int value) {
         // TODO Problem 3
+        Node? curr = _head;
+
+        while (curr != null)
+        {
+            if (curr.Data == value)
+            {
+                if (curr == _head)
+                {
+                    RemoveHead();
+                    break;
+                }
+                else if (curr == _tail)
+                {
+                    RemoveTail();
+                    break;
+                }
+                else
+                {
+                    curr.Prev.Next = curr.Next;
+                    curr.Next.Prev = curr.Prev;
+                    break;
+                }
+            }
+
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
@@ -101,6 +154,17 @@ public class LinkedList : IEnumerable<int> {
     /// </summary>
     public void Replace(int oldValue, int newValue) {
         // TODO Problem 4
+        Node? curr = _head;
+
+        while (curr != null)
+        {
+            if (curr.Data == oldValue)
+            {
+                curr.Data = newValue;
+            }
+
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
