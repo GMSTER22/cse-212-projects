@@ -27,8 +27,6 @@ public static class LinkedListTester {
         Console.WriteLine(ll2.ToString()); // <LinkedList>{1, 5, 9, 8}
 
         Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
-        Console.WriteLine(ll.ToString());
-        Console.WriteLine("After check");
         ll.RemoveTail();
         Console.WriteLine(ll.ToString()); // <LinkedList>{5, 4, 3, 2, 2, 2, 1, 0}
         ll.RemoveTail();
@@ -92,5 +90,12 @@ public static class LinkedListTester {
 
         Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
         Console.WriteLine(ll.Reverse().AsString()); // <IEnumerable>[10, 10, 35, 100}
+
+        var ll5 = new LinkedList();
+        ll5.InsertHead(5);
+        ll5.InsertHead(10);
+        ll5.InsertHead(25);
+        ll5.InsertHead(100);
+        Console.WriteLine(ll5.Reverse().AsString()); // <IEnumerable>[5, 10, 25, 100}
     }
 }
