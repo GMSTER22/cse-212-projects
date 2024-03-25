@@ -5,6 +5,7 @@ public static class RecursionTester {
     public static void Run() {
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
+        Console.WriteLine(SumSquaresRecursive(3)); // 14
         Console.WriteLine(SumSquaresRecursive(10)); // 385
         Console.WriteLine(SumSquaresRecursive(100)); // 338350
 
@@ -147,7 +148,10 @@ public static class RecursionTester {
     /// </summary>
     public static int SumSquaresRecursive(int n) {
         // TODO Start Problem 1
-        return 0;
+        if (n <= 0)
+            return 0;
+
+        return (int)Math.Pow(n, 2) + SumSquaresRecursive(n - 1);
     }
 
     /// <summary>
@@ -171,6 +175,19 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
+        if (word.Length == size)
+        {
+            Console.WriteLine(word);
+        }
+        else
+        {
+            for (var i = 0; i < letters.Length; i++)
+            {
+                var lettersLeft = letters.Remove(i, 1);
+
+                PermutationsChoose(lettersLeft, size, word + letters[i]);
+            }
+        }
     }
 
     /// <summary>
