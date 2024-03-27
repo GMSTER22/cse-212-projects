@@ -276,6 +276,19 @@ public static class RecursionTester {
     /// </summary>
     public static void WildcardBinary(string pattern) {
         // TODO Start Problem 4
+        if (! pattern.Contains('*'))
+        {
+            Console.WriteLine(pattern);
+        }
+        else
+        {
+            for (var i = 0; i < 2; i++)
+            {
+                var index = pattern.IndexOf('*');
+                var result = pattern.Remove(index, 1).Insert(index, $"{i}");
+                WildcardBinary(result);
+            }
+        }
     }
 
     /// <summary>
