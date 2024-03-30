@@ -159,7 +159,7 @@ public static class RecursionTester {
     /// # Problem 2 #
     /// #############
     /// Using recursion Print permutations of length
-    /// 'size' from a list of 'letters'.  This function
+    /// 'size' from a list of 'letters'. This function
     /// should assume that each letter is unique (i.e. the 
     /// function does not need to find unique permutations).
     ///
@@ -298,8 +298,41 @@ public static class RecursionTester {
     public static void SolveMaze(Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null) {
         // If this is the first time running the function, then we need
         // to initialize the currPath list.
-        if (currPath == null)
+        if (currPath == null) {
             currPath = new List<ValueTuple<int, int>>();
+            currPath.Add((0, 0));
+        }
+
+        if (maze.IsEnd(x,y))
+            Console.WriteLine(currPath.AsString());
+
+        if (maze.IsValidMove(currPath, x, y+1))
+        {
+            currPath.Add((x, y+1));
+            SolveMaze(maze, x, y+1, currPath);
+            currPath.RemoveAt(currPath.Count -1);
+        }
+
+        if (maze.IsValidMove(currPath, x+1, y))
+        {
+            currPath.Add((x+1, y));
+            SolveMaze(maze, x+1, y, currPath);
+            currPath.RemoveAt(currPath.Count -1);
+        }        
+
+        if (maze.IsValidMove(currPath, x, y-1))
+        {
+            currPath.Add((x, y-1));
+            SolveMaze(maze, x, y-1, currPath);
+            currPath.RemoveAt(currPath.Count -1);
+        }
+
+        if (maze.IsValidMove(currPath, x-1, y))
+        {
+            currPath.Add((x-1, y));
+            SolveMaze(maze, x-1, y, currPath);
+            currPath.RemoveAt(currPath.Count -1);
+        }
 
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
