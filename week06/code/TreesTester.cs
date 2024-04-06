@@ -19,6 +19,15 @@ public static class TreesTester {
         tree.Insert(6);
         Console.WriteLine(tree.ToString()); // 1, 3, 4, 5, 6, 7, 10
 
+        BinarySearchTree treeExtraTest = new BinarySearchTree();
+        treeExtraTest.Insert(10);
+        treeExtraTest.Insert(15);
+        treeExtraTest.Insert(5);
+        treeExtraTest.Insert(12);
+        treeExtraTest.Insert(10);
+        treeExtraTest.Insert(12);
+        Console.WriteLine(treeExtraTest.ToString()); // 5 10 12 15
+
         Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
         Console.WriteLine(tree.Contains(3)); // True
         Console.WriteLine(tree.Contains(2)); // False
@@ -98,5 +107,16 @@ public static class TreesTester {
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst) {
         // TODO Start Problem 5
+        if (first > last)
+        {
+            return;
+        }
+
+        int middle = (first + last) / 2;
+
+        bst.Insert( sortedNumbers[middle] ); 
+
+        InsertMiddle( sortedNumbers, first, middle - 1, bst ); 
+        InsertMiddle( sortedNumbers, middle + 1, last, bst ); 
     }
 }
